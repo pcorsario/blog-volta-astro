@@ -4,16 +4,37 @@ import Hero from '../components/Hero.astro'
 import Feature from '../components/Feature.astro'
 import Counter from '../components/Counter.astro'
 import ContentMedia from '../components/ContentMedia.astro'
+import PokemonCard from '../components/PokemonCard.astro'
+
+// LLamado a PokeAPI
+const response = await fetch (
+  "http://pokeapi.co/api/v2/pokemon?limit=28")
+  .then((res) => res.json())
+
+const pokemons = response.results.map((data, index) =>{
+  return { 
+    name: data.name,
+    id: index + 1,
+    image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index +1 }.png`,
+  }
+});
+console.log(pokemons);
 ---
 
 <DefaultLayout title="Home">
   <Hero />
+      <main class="grid md:grid-cols-4 grid-cols-2 gap-4 p-2">
+        {pokemons.map((pokemon)=>
+          <PokemonCard {pokemon} />
+        )}
+      </main>
   <section class="my-64">
     <div class="container">
-      <h2 class="mb-16 text-6xl">Features</h2>
+
+      <h2 class="mb-16 text-6xl">Figuras Profesionales</h2>
       <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
-        <Feature icon="mdi:tailwind" title="Tailwind CSS">
-          Use the power of Tailwind to greatly improve your productivity and enhance your developer workflow.
+        <Feature icon="mdi:weather-night-partly-cloudy" title="Informática">
+          Optimizar el tratamiento de la información mediante el procesamiento automático,utilizando lenguajes de programación bases de datos, herramientas ofimáticas ...  
         </Feature>
         <Feature icon="mdi:wheelchair-accessibility" title="a11y Components">
           17 components and counting, all tried and tested for the most optimal accessible experience for your visitors.
@@ -63,7 +84,7 @@ import ContentMedia from '../components/ContentMedia.astro'
     <div class="container">
       <h2 class="mb-16 text-6xl">Counters</h2>
       <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-4">
-        <Counter count="130" title="Stars" sub="On GitHub" />
+        <Counter count="22" title="Stars" sub="On GitHub" />
         <Counter count="17" title="Accessible" sub="Components" />
         <Counter count="500" title="Commits" sub="Merged" />
         <Counter count="18+" title="Months" sub="Since launch" />

@@ -1,0 +1,20 @@
+---
+import Feature from '../components/Feature.astro'
+
+   const response = await fetch(
+    "https://official-joke-api.appspot.com/random_ten"
+   );
+   const data = await response.json();
+---
+<h1>Jokes</h1>
+<div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3"></div>
+    {
+        data.map((joke)=>{
+            return 
+        <Feature icon="mdi:weather-night-partly-cloudy" title="{joke.setup  }">
+
+        </Feature>
+       
+        })
+    }
+ </div>

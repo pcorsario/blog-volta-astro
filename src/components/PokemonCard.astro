@@ -1,0 +1,13 @@
+---
+    let { pokemon } = Astro.props
+---
+<a href="#"
+    class="flex flex-col w-full items-center 
+    border-gray-500 border rounded rounded-2xl 
+    hover:bg-yellow-200 cursor-pointer">
+    <img 
+    class="w-28"
+    src={pokemon.image}
+    />
+    <h4>{ pokemon.name }</h4>
+</a>
